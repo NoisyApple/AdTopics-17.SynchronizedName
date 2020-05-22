@@ -1,13 +1,16 @@
 package com.milkyblue;
 
-public class CountThread implements Runnable {
+public class StringThread implements Runnable {
 
+  private String strToDisplay;
   private int position;
   private int maxThreads;
   private BlockingBuffer sharedBuffer;
   private int sleepMultiplier;
 
-  public CountThread(int position, int maxThreads, BlockingBuffer sharedBuffer, int sleepMultiplier) {
+  public StringThread(String strToDisplay, int position, int maxThreads, BlockingBuffer sharedBuffer,
+      int sleepMultiplier) {
+    this.strToDisplay = strToDisplay;
     this.position = position;
     this.maxThreads = maxThreads;
     this.sharedBuffer = sharedBuffer;
@@ -21,7 +24,7 @@ public class CountThread implements Runnable {
       Thread.sleep(position * sleepMultiplier);
 
       for (int i = 0; i < 10; i++) {
-        sharedBuffer.put(Integer.toString(i + 1));
+        sharedBuffer.put(strToDisplay);
         Thread.sleep((maxThreads + 1) * sleepMultiplier);
       }
 
